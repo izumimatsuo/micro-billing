@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+#psycopg2
+requests
+pytest
+coverage
+flake8
+black
+mypy
+python-dateutil
