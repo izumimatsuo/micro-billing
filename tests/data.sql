@@ -19,6 +19,6 @@ VALUES
   ('2021-01-01 00:00:00','2021-01-01 00:00:00', 4, 1, 'active', '2021-02-28 00:00:00','2021-01-01 00:00:00','2021-01-01 00:00:00'),
   ('2021-01-01 00:00:00','2021-01-01 00:00:00', 5, 2, 'canceled', '2021-01-01 00:00:00','2021-01-01 00:00:00','2021-01-01 00:00:00');
  
-INSERT INTO invoices (currency, customer_id, period_end, period_start, status, subscription_id, total)
+INSERT INTO invoices (currency, customer_id, period_end, period_start, status, subscription_id, total, created_at, updated_at)
 VALUES
-  ('jpy', 1, '2021-01-01 00:00:00','2021-01-01 00:00:00', 'open', 1, 980);
+  ('jpy', 1, '2021-01-01 00:00:00','2021-01-01 00:00:00', 'open', 1, 980,'2021-01-01 00:00:00','2021-01-01 00:00:00');

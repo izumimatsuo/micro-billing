@@ -2,7 +2,6 @@ import enum
 import sqlalchemy as sa
 
 from datetime import datetime
-from sqlalchemy.orm import relationship
 
 from .core import Currency
 from ..database import Base
@@ -29,6 +28,10 @@ class Invoice(Base):
         sa.Integer, sa.ForeignKey("subscriptions.id"), nullable=True
     )
     total = sa.Column(sa.Integer, nullable=False)
+    created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
+    updated_at = sa.Column(
+        sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
+    )
 
     def __init__(
         self,

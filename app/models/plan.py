@@ -1,8 +1,6 @@
-import enum
 import sqlalchemy as sa
 
 from datetime import datetime
-from sqlalchemy.orm import relationship
 
 from .core import Currency
 from ..database import Base
