@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from sqlalchemy import extract
 
-from ..models import Subscription, SubscriptionStatus
+from ..models.subscription import Subscription, SubscriptionStatus
 from ..repositories import InvoiceRepository
 from ..database import session
 

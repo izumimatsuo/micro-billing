@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 
-from .models import Customer, Plan, Subscription, Invoice
-
+from .models.customer import Customer
 
 class CustomerRepository:
     @staticmethod
@@ -13,6 +12,8 @@ class CustomerRepository:
         return db.query(Customer).filter_by(id=customer_id).first()
 
 
+from .models.plan import Plan
+
 class PlanRepository:
     @staticmethod
     def list(db: Session):
@@ -23,6 +24,8 @@ class PlanRepository:
         return db.query(Plan).filter_by(id=plan_id).first()
 
 
+from .models.subscription import Subscription
+
 class SubscriptionRepository:
     @staticmethod
     def list(db: Session):
@@ -32,6 +35,8 @@ class SubscriptionRepository:
     def get(db: Session, subscription_id: int):
         return db.query(Subscription).filter_by(id=subscription_id).first()
 
+
+from .models.invoice import Invoice
 
 class InvoiceRepository:
     @staticmethod
