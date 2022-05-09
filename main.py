@@ -1,13 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import router
 from app.database import Base, engine
-
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title='Micro Billing', version='0.1.0')
-app.include_router(router, prefix="")
+from app.routers import router
 
-@app.get("/")
-async def root():
-    return {"message": "Hello micro billing application."}
+def get_app():
+    app = FastAPI(title='Micro Billing', version='0.1.0')
+    app.include_router(router, prefix="")
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    return app
+
+app = get_app()
