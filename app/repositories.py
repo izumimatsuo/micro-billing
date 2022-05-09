@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from .models.customer import Customer
 
+
 class CustomerRepository:
     @staticmethod
     def list(db: Session):
@@ -13,6 +14,7 @@ class CustomerRepository:
 
 
 from .models.plan import Plan
+
 
 class PlanRepository:
     @staticmethod
@@ -26,6 +28,7 @@ class PlanRepository:
 
 from .models.subscription import Subscription
 
+
 class SubscriptionRepository:
     @staticmethod
     def list(db: Session):
@@ -37,6 +40,7 @@ class SubscriptionRepository:
 
 
 from .models.invoice import Invoice
+
 
 class InvoiceRepository:
     @staticmethod
