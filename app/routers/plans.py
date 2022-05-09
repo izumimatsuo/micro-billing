@@ -7,13 +7,13 @@ from ..database import session
 router = APIRouter()
 
 
-@router.get("/plans/")
+@router.get("/")
 def get_plan_list(db: Session = Depends(session)):
     plans = PlanRepository.list(db)
     return {"plans": [plan.to_dict() for plan in plans]}
 
 
-@router.get("/plans/{plan_id}")
+@router.get("/{plan_id}")
 def get_plan(plan_id: int, db: Session = Depends(session)):
     plan = PlanRepository.get(db, plan_id)
     if not plan:

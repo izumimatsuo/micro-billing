@@ -14,13 +14,13 @@ from ..database import session
 router = APIRouter()
 
 
-@router.get("/invoices/")
+@router.get("/")
 def get_invoice_list(db: Session = Depends(session)):
     invoices = InvoiceRepository.list(db)
     return {"invoices": [invoice.to_dict() for invoice in invoices]}
 
 
-@router.get("/invoices/data")
+@router.get("/data")
 def create_invoices(db: Session = Depends(session)):
     f = StringIO()
     writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
@@ -37,7 +37,7 @@ def create_invoices(db: Session = Depends(session)):
     return Response(content=f.getvalue(), media_type="text/csv")
 
 
-@router.get("/invoices/{invoice_id}")
+@router.get("/{invoice_id}")
 def get_invoice(invoice_id: int, db: Session = Depends(session)):
     invoice = InvoiceRepository.get(db, invoice_id)
     if not invoice:
@@ -45,7 +45,7 @@ def get_invoice(invoice_id: int, db: Session = Depends(session)):
     return invoice.to_dict()
 
 
-@router.get("/invoices/data/{invoice_date}")
+@router.get("/data/{invoice_date}")
 def create_invoices_by_date(invoice_date: str, db: Session = Depends(session)):
 
     try:
