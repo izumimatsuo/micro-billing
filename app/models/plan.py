@@ -2,7 +2,7 @@ import sqlalchemy as sa
 
 from datetime import datetime
 
-from .core import Currency
+from .core import CurrencyType
 from ..database import Base
 
 
@@ -12,7 +12,7 @@ class Plan(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String, nullable=False)
     amount = sa.Column(sa.Integer, nullable=False)
-    currency = sa.Column(sa.Enum(Currency), nullable=False)
+    currency = sa.Column(sa.Enum(CurrencyType), nullable=False)
     created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
     updated_at = sa.Column(
         sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
