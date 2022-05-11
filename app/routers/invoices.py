@@ -11,7 +11,7 @@ from app.models.subscription import Subscription, SubscriptionStatusType
 from app.repositories import invoice_repository
 from app.database import session
 
-router = APIRouter()
+router = APIRouter(prefix="/invoices", tags=["invoices"])
 
 
 @router.get("/")

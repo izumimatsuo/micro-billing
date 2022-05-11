@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.repositories import plan_repository
 from app.database import session
 
-router = APIRouter()
+router = APIRouter(prefix="/plans", tags=["plans"])
 
 
 @router.get("/")
