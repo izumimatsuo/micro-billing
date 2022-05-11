@@ -7,16 +7,16 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from sqlalchemy import extract
 
-from ..models.subscription import Subscription, SubscriptionStatusType
-from ..repositories import InvoiceRepository
-from ..database import session
+from app.models.subscription import Subscription, SubscriptionStatusType
+from app.repositories import invoice_repository
+from app.database import session
 
 router = APIRouter()
 
 
 @router.get("/")
 def get_invoice_list(db: Session = Depends(session)):
-    invoices = InvoiceRepository.list(db)
+    invoices = invoice_repository.list(db)
     return {"invoices": [invoice.to_dict() for invoice in invoices]}
 
 
@@ -39,7 +39,7 @@ def create_invoices(db: Session = Depends(session)):
 
 @router.get("/{invoice_id}")
 def get_invoice(invoice_id: int, db: Session = Depends(session)):
-    invoice = InvoiceRepository.get(db, invoice_id)
+    invoice = invoice_repository.get(db, invoice_id)
     if not invoice:
         raise HTTPException(status_code=404, detail="invoice not found.")
     return invoice.to_dict()
