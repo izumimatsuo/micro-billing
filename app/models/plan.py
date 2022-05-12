@@ -1,5 +1,5 @@
 import enum
-import sqlalchemy as sa
+from sqlalchemy import Column, Integer, String, DateTime, Enum
 
 from datetime import datetime
 
@@ -17,15 +17,15 @@ class Interval(str, enum.Enum):
 class Plan(Base):
     __tablename__ = "plans"
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String, nullable=False)
-    amount = sa.Column(sa.Integer, nullable=False)
-    currency = sa.Column(sa.Enum(Currency), nullable=False)
-    interval = sa.Column(sa.Enum(Interval), nullable=False)
-    interval_count = sa.Column(sa.Integer, nullable=False, default=1)
-    created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
-    updated_at = sa.Column(
-        sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    amount = Column(Integer, nullable=False)
+    currency = Column(Enum(Currency), nullable=False)
+    interval = Column(Enum(Interval), nullable=False)
+    interval_count = Column(Integer, nullable=False, default=1)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
     def to_dict(self):

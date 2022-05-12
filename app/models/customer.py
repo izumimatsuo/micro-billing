@@ -1,4 +1,4 @@
-import sqlalchemy as sa
+from sqlalchemy import Column, Integer, String, DateTime
 
 from datetime import datetime
 
@@ -8,11 +8,11 @@ from ..database import Base
 class Customer(Base):
     __tablename__ = "customers"
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String, nullable=False)
-    created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
-    updated_at = sa.Column(
-        sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
     def to_dict(self):

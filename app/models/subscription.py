@@ -1,5 +1,5 @@
 import enum
-import sqlalchemy as sa
+from sqlalchemy import Column, Integer, DateTime, Enum, ForeignKey
 
 from datetime import datetime
 from sqlalchemy.orm import relationship
@@ -22,18 +22,18 @@ class SubscriptionStatus(str, enum.Enum):
 class Subscription(Base):
     __tablename__ = "subscriptions"
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    current_period_start = sa.Column(sa.DateTime, nullable=False)
-    current_period_end = sa.Column(sa.DateTime, nullable=False)
-    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.id"), nullable=False)
+    id = Column(Integer, primary_key=True)
+    current_period_start = Column(DateTime, nullable=False)
+    current_period_end = Column(DateTime, nullable=False)
+    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
     customer = relationship(Customer, backref="customers")
-    plan_id = sa.Column(sa.Integer, sa.ForeignKey("plans.id"), nullable=False)
+    plan_id = Column(Integer, ForeignKey("plans.id"), nullable=False)
     plan = relationship(Plan, backref="plans")
-    status = sa.Column(sa.Enum(SubscriptionStatus), nullable=False)
-    start_date = sa.Column(sa.DateTime, nullable=False)
-    created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
-    updated_at = sa.Column(
-        sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
+    status = Column(Enum(SubscriptionStatus), nullable=False)
+    start_date = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
     def to_dict(self):

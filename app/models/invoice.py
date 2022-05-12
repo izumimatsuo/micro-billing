@@ -1,5 +1,5 @@
 import enum
-import sqlalchemy as sa
+from sqlalchemy import Column, Integer, DateTime, Enum, ForeignKey
 
 from datetime import datetime
 
@@ -18,19 +18,17 @@ class InvoiceStatus(str, enum.Enum):
 class Invoice(Base):
     __tablename__ = "invoices"
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    currency = sa.Column(sa.Enum(Currency), nullable=False)
-    customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.id"), nullable=False)
-    period_end = sa.Column(sa.DateTime, nullable=False)
-    period_start = sa.Column(sa.DateTime, nullable=False)
-    status = sa.Column(sa.Enum(InvoiceStatus), nullable=False)
-    subscription_id = sa.Column(
-        sa.Integer, sa.ForeignKey("subscriptions.id"), nullable=True
-    )
-    total = sa.Column(sa.Integer, nullable=False)
-    created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
-    updated_at = sa.Column(
-        sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
+    id = Column(Integer, primary_key=True)
+    currency = Column(Enum(Currency), nullable=False)
+    customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
+    period_end = Column(DateTime, nullable=False)
+    period_start = Column(DateTime, nullable=False)
+    status = Column(Enum(InvoiceStatus), nullable=False)
+    subscription_id = Column(Integer, ForeignKey("subscriptions.id"), nullable=True)
+    total = Column(Integer, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
     def to_dict(self):
