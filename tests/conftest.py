@@ -1,5 +1,4 @@
 import os
-import tempfile
 import pytest
 
 from fastapi.testclient import TestClient
@@ -17,8 +16,7 @@ with open(os.path.join(os.path.dirname(__file__), "data.sql"), "rb") as f:
 
 
 def override_session():
-    db_fd, db_path = tempfile.mkstemp()
-    SQLALCHEMY_DATABASE_URL = "sqlite:///" + db_path
+    SQLALCHEMY_DATABASE_URL = "sqlite:///"
 
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
     Base.metadata.create_all(bind=engine)
@@ -41,8 +39,6 @@ def override_session():
         yield db
     finally:
         db.close()
-        os.close(db_fd)
-        os.unlink(db_path)
 
 
 @pytest.fixture
