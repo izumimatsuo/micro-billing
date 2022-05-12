@@ -7,7 +7,7 @@ from .core import Currency
 from ..database import Base
 
 
-class InvoiceStatusType(str, enum.Enum):
+class InvoiceStatus(str, enum.Enum):
     draft = "draft"  # 未確定
     open = "open"  # 確定
     paid = "paid"  # 支払い済み
@@ -23,7 +23,7 @@ class Invoice(Base):
     customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.id"), nullable=False)
     period_end = sa.Column(sa.DateTime, nullable=False)
     period_start = sa.Column(sa.DateTime, nullable=False)
-    status = sa.Column(sa.Enum(InvoiceStatusType), nullable=False)
+    status = sa.Column(sa.Enum(InvoiceStatus), nullable=False)
     subscription_id = sa.Column(
         sa.Integer, sa.ForeignKey("subscriptions.id"), nullable=True
     )
