@@ -6,10 +6,10 @@ VALUES
   ('Hanako', '2021-01-01 00:00:00', '2021-01-01 00:00:00'),
   ('Junko', '2021-01-01 00:00:00', '2021-01-01 00:00:00');
 
-INSERT INTO plans (name, amount, currency, created_at, updated_at)
+INSERT INTO plans (name, amount, currency, interval, interval_count, created_at, updated_at)
 VALUES
-  ('Low', 980, 'jpy', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-  ('High', 1500, 'jpy', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+  ('Low', 980, 'jpy', 'month', 1, '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+  ('High', 1500, 'jpy', 'month', 1, '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 INSERT INTO subscriptions (current_period_start, current_period_end, customer_id, plan_id, status, start_date, created_at, updated_at)
 VALUES
