@@ -3,7 +3,7 @@ import sqlalchemy as sa
 
 from datetime import datetime
 
-from .core import CurrencyType
+from .core import Currency
 from ..database import Base
 
 
@@ -19,7 +19,7 @@ class Invoice(Base):
     __tablename__ = "invoices"
 
     id = sa.Column(sa.Integer, primary_key=True)
-    currency = sa.Column(sa.Enum(CurrencyType), nullable=False)
+    currency = sa.Column(sa.Enum(Currency), nullable=False)
     customer_id = sa.Column(sa.Integer, sa.ForeignKey("customers.id"), nullable=False)
     period_end = sa.Column(sa.DateTime, nullable=False)
     period_start = sa.Column(sa.DateTime, nullable=False)
