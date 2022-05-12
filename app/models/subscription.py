@@ -36,24 +36,6 @@ class Subscription(Base):
         sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
-    def __init__(
-        self,
-        id,
-        current_period_start,
-        current_period_end,
-        customer_id,
-        plan_id,
-        status,
-        start_date,
-    ):
-        self.id = id
-        self.current_period_start = current_period_start
-        self.current_period_end = current_period_end
-        self.customer_id = customer_id
-        self.plan_id = plan_id
-        self.status = status
-        self.start_date = start_date
-
     def to_dict(self):
         return dict(
             id=self.id,

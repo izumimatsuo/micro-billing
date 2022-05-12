@@ -33,26 +33,6 @@ class Invoice(Base):
         sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
-    def __init__(
-        self,
-        id,
-        currency,
-        customer_id,
-        period_end,
-        period_start,
-        status,
-        subscription_id,
-        total,
-    ):
-        self.id = id
-        self.currency = currency
-        self.customer_id = customer_id
-        self.period_end = period_end
-        self.period_start = period_start
-        self.status = status
-        self.subscription_id = subscription_id
-        self.total = total
-
     def to_dict(self):
         return dict(
             id=self.id,

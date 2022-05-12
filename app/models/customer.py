@@ -15,10 +15,6 @@ class Customer(Base):
         sa.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now
     )
 
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
-
     def to_dict(self):
         return dict(
             id=self.id,
