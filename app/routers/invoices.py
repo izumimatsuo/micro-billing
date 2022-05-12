@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from sqlalchemy import extract
 
-from app.models.subscription import Subscription, SubscriptionStatusType
+from app.models.subscription import Subscription, SubscriptionStatus
 from app.repositories import invoice_repository, session
 
 
@@ -28,7 +28,7 @@ def create_invoices(db: Session = Depends(session)):
     writer.writerow(["name", "amount", "start_date"])
     for t in (
         db.query(Subscription)
-        .filter(Subscription.status == SubscriptionStatusType.active)
+        .filter(Subscription.status == SubscriptionStatus.active)
         .all()
     ):
         writer.writerow([t.customer.name, t.plan.amount, t.start_date])
@@ -60,7 +60,7 @@ def create_invoices_by_date(invoice_date: str, db: Session = Depends(session)):
         targets = (
             db.query(Subscription)
             .filter(
-                Subscription.status == SubscriptionStatusType.active,
+                Subscription.status == SubscriptionStatus.active,
                 extract("day", Subscription.start_date) >= invoice_datetime.day,
             )
             .all()
@@ -69,7 +69,7 @@ def create_invoices_by_date(invoice_date: str, db: Session = Depends(session)):
         targets = (
             db.query(Subscription)
             .filter(
-                Subscription.status == SubscriptionStatusType.active,
+                Subscription.status == SubscriptionStatus.active,
                 extract("day", Subscription.start_date) == invoice_datetime.day,
             )
             .all()

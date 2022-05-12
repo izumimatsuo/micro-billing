@@ -9,7 +9,7 @@ from .plan import Plan
 from ..database import Base
 
 
-class SubscriptionStatusType(str, enum.Enum):
+class SubscriptionStatus(str, enum.Enum):
     active = "active"  # 有効
     past_due = "past_due"  # 遅延
     unpaid = "unpaid"  # 未払い
@@ -29,7 +29,7 @@ class Subscription(Base):
     customer = relationship(Customer, backref="customers")
     plan_id = sa.Column(sa.Integer, sa.ForeignKey("plans.id"), nullable=False)
     plan = relationship(Plan, backref="plans")
-    status = sa.Column(sa.Enum(SubscriptionStatusType), nullable=False)
+    status = sa.Column(sa.Enum(SubscriptionStatus), nullable=False)
     start_date = sa.Column(sa.DateTime, nullable=False)
     created_at = sa.Column(sa.DateTime, nullable=False, default=datetime.now)
     updated_at = sa.Column(
