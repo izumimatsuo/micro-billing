@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import extract
 
 from app.models.subscription import Subscription, SubscriptionStatus
-from app.repositories import invoice_repository, session
+from app.models import invoice as invoice_repository, session
 
 
 router = APIRouter(prefix="/invoices", tags=["invoices"])
@@ -16,7 +16,7 @@ router = APIRouter(prefix="/invoices", tags=["invoices"])
 
 @router.get("/")
 def get_invoice_list(db: Session = Depends(session)):
-    invoices = invoice_repository.list(db)
+    invoices = invoice_repository.get_list(db)
     return {"invoices": [invoice.to_dict() for invoice in invoices]}
 
 

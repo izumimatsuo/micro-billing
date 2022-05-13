@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 
 from main import app
 from app.database import Base
-from app.repositories import session
+from app.models import session
 
 
 with open(os.path.join(os.path.dirname(__file__), "data.sql"), "rb") as f:

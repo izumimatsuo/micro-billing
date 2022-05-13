@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.orm import Session
 
 from datetime import datetime
 
@@ -20,3 +21,11 @@ class Customer(Base):
             id=self.id,
             name=self.name,
         )
+
+
+def get_list(db: Session):
+    return db.query(Customer).all()
+
+
+def get(db: Session, customer_id: int):
+    return db.query(Customer).filter_by(id=customer_id).first()

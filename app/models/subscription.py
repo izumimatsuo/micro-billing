@@ -1,8 +1,8 @@
 import enum
 from sqlalchemy import Column, Integer, DateTime, Enum, ForeignKey
+from sqlalchemy.orm import Session, relationship
 
 from datetime import datetime
-from sqlalchemy.orm import relationship
 
 from .customer import Customer
 from .plan import Plan
@@ -46,3 +46,11 @@ class Subscription(Base):
             status=self.status,
             start_date=str(self.start_date),
         )
+
+
+def get_list(db: Session):
+    return db.query(Subscription).all()
+
+
+def get(db: Session, subscription_id: int):
+    return db.query(Subscription).filter_by(id=subscription_id).first()

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.repositories import subscription_repository, session
+from app.models import subscription as subscription_repository, session
 
 
 router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
@@ -9,7 +9,7 @@ router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
 
 @router.get("/")
 def get_subscription_list(db: Session = Depends(session)):
-    subscriptions = subscription_repository.list(db)
+    subscriptions = subscription_repository.get_list(db)
     return {"subscriptions": [subscription.to_dict() for subscription in subscriptions]}
 
 

@@ -1,5 +1,6 @@
 import enum
 from sqlalchemy import Column, Integer, String, DateTime, Enum
+from sqlalchemy.orm import Session
 
 from datetime import datetime
 
@@ -37,3 +38,11 @@ class Plan(Base):
             interval=self.interval,
             interval_count=self.interval_count,
         )
+
+
+def get_list(db: Session):
+    return db.query(Plan).all()
+
+
+def get(db: Session, plan_id: int):
+    return db.query(Plan).filter_by(id=plan_id).first()

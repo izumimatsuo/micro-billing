@@ -1,5 +1,6 @@
 import enum
 from sqlalchemy import Column, Integer, DateTime, Enum, ForeignKey
+from sqlalchemy.orm import Session
 
 from datetime import datetime
 
@@ -42,3 +43,11 @@ class Invoice(Base):
             subscription_id=self.subscription_id,
             total=self.total,
         )
+
+
+def get_list(db: Session):
+    return db.query(Invoice).all()
+
+
+def get(db: Session, invoice_id: int):
+    return db.query(Invoice).filter_by(id=invoice_id).first()

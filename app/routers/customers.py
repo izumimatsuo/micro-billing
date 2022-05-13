@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.repositories import customer_repository, session
+from app.models import customer as customer_repository, session
 
 
 router = APIRouter(prefix="/customers", tags=["customers"])
@@ -9,7 +9,7 @@ router = APIRouter(prefix="/customers", tags=["customers"])
 
 @router.get("/")
 def get_customer_list(db: Session = Depends(session)):
-    customers = customer_repository.list(db)
+    customers = customer_repository.get_list(db)
     return {"customers": [customer.to_dict() for customer in customers]}
 
 
